@@ -17,7 +17,7 @@ function App() {
     const [pokeNames, setPokeNames] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    /* useEffect(() => {
+    useEffect(() => {
         async function getPokes() {
             try {
                 const response = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0');
@@ -30,7 +30,7 @@ function App() {
         }
         getPokes();
         console.log('fetchin');
-    }, []); */
+    }, []); 
 
 
     return (
@@ -39,7 +39,7 @@ function App() {
             <Navbar />
             <Routes>
                 <Route path='/' element={<Home />} />
-                <Route path='/team' element={<Team />} />
+                <Route path='/team' element={<Team pokeNames={pokeNames}/>} />
                 <Route path='/about' element={<About />} />
             </Routes>
         </div>

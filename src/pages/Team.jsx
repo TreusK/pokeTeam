@@ -1,23 +1,13 @@
 //import './Team.css';
 import Card from '../components/Card';
+import Input from '../components/Input';
 
-function Team() {
+function Team({pokeNames}) {
+    
+    console.log('Team being rendered')
    return (
        <div>
-           <div className="mx-auto max-w-3xl text-center">
-                <h2 className="p-6 text-3xl">Add a pokemon</h2>
-  
-                <div className='p-4'>
-                    <input type="text" list="pokeNames"
-                    placeholder="Enter Here" />
-                    <datalist id="pokeNames">
-                        <option value="Pikachu">Pikachu</option>
-                        <option value="Pampur">Pampur</option>
-                        <option value="Perrosan">Perrosan</option>
-                    </datalist>
-                </div>
-
-            </div>
+            <Input pokeNames={pokeNames}/>
             <div className="bg-gray-400 p-2 max-w-4xl mx-auto grid grid-cols-2 xs:grid-cols-3 justify-items-center gap-10">
                 <Card />
                 <Card />
