@@ -9,13 +9,15 @@ import Home from './pages/Home';
 import Team from './pages/Team';
 import About from './pages/About';
 import './App.css';
+//Extra
+
 
 function App() {
     const [teams, setTeams] = useState([]);
     const [pokeNames, setPokeNames] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
+    /* useEffect(() => {
         async function getPokes() {
             try {
                 const response = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0');
@@ -28,7 +30,7 @@ function App() {
         }
         getPokes();
         console.log('fetchin');
-    }, []);
+    }, []); */
 
 
     return (

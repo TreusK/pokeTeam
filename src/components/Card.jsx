@@ -2,9 +2,9 @@
 
 function Card() {
    return (
-       <div className='w-36 h-52 bg-blue-100 text-center'>
+       <div className='Card w-36 h-48 bg-white text-center rounded shadow-lg'>
            <p>Pikachu</p>
-           <div className='flex justify-center'>
+           <div className='flex justify-center bg-blue-100'>
                 <img className='scale-125' src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/23.png" alt="mon" />
            </div>
            <div>

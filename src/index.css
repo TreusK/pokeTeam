@@ -1,3 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@font-face {
+    font-family: 'Kanit';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Kanit'), url('/src/assets/fonts/Kanit-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Bakbak';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Bakbak'), url('/src/assets/fonts/BakbakOne-Regular.ttf') format('truetype');
+}
+
+body {
+    font-family: Kanit, sans-serif;
+}
