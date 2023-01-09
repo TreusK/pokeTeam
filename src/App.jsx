@@ -20,8 +20,8 @@ function App() {
     useEffect(() => {
         async function getPokes() {
             try {
-                const response = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0');
-                setPokeNames(response.data);
+                const response = await axios.get('https://pokeapi.co/api/v2/pokemon-species/?limit=20000');
+                setPokeNames(response.data.results);
             } catch(err) {
                 console.log(err.message)
             } finally {
