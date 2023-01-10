@@ -6,33 +6,34 @@ import axios from 'axios';
 import Card from '../components/Card';
 import Input from '../components/Input';
 
-let poke1 = {
-    name: 'Pikachu',
-    id: 25,
-    sprite: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png',
-}
 
 let arr = [0, 1, 2, 3, 4, 5];
 
 function Team({pokeNames}) {
-    const [currentTeam, setCurrentTeam] = useState([poke1]);
+    const [currentTeam, setCurrentTeam] = useState([]);
 
     async function handleAddPoke(value) {
         if(value && value[0] !== ' ' && currentTeam.length < 6) {
             try {
                 const pokeInfo = await axios.get(`https://pokeapi.co/api/v2/pokemon/${value.toLowerCase()}`);
-                let poke = {
-                    name: pokeInfo.data.name,
-                    id: pokeInfo.data.id,
-                    sprite: pokeInfo.data.sprites.front_default
-                };
+                let poke = makePokeObject(pokeInfo.data);
+                console.log(poke.types[0].type.name)
                 setCurrentTeam(oldTeam => [...oldTeam, poke]);
-
             } catch(err) {
                 console.log(err.message)
             } finally {
                 console.log(value)
             }
+        }
+    }
+
+    function makePokeObject(data) {
+        return {
+            id: data.id, 
+            name: data.name,    
+            sprite: data.sprites.front_default, 
+            types: data.types,
+            baseStats: data.stats,
         }
     }
 
