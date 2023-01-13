@@ -11,7 +11,7 @@ function Input({pokeNames, handleAddPoke}) {
     }
      
     let filteredPokes = input.length > 0 
-        ? pokeNames.filter(poke => poke.name.startsWith(input.toLowerCase())).slice(0, 5)
+        ? pokeNames.filter(poke => (poke.name.startsWith(input.toLowerCase()) && poke.name.length !== input.length)).slice(0, 5)
         : [];
 
 

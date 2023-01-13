@@ -32,6 +32,12 @@ function App() {
         console.log('fetchin');
     }, []); 
 
+    function handleSaveTeam(currentTeam) {
+        if(currentTeam.length < 6) {
+            setTeams(oldTeams => [...oldTeams, currentTeam])
+        }
+    }
+
 
     return (
         <div className='h-screen flex flex-col'>
@@ -39,7 +45,7 @@ function App() {
             <Navbar />
             <Routes>
                 <Route path='/' element={<Home />} />
-                <Route path='/team' element={<Team pokeNames={pokeNames}/>} />
+                <Route path='/team' element={<Team pokeNames={pokeNames} handleSaveTeam={handleSaveTeam}/>} />
                 <Route path='/about' element={<About />} />
             </Routes>
         </div>
