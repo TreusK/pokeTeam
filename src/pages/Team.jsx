@@ -10,15 +10,29 @@ import Input from '../components/Input';
 const arr = [0, 1, 2, 3, 4, 5];
 
 function Team({pokeNames, handleSaveTeam}) {
-    const [currentTeam, setCurrentTeam] = useState([]);
+    const [currentTeam, setCurrentTeam] = useState([
+        {cardIndex:0, canBeReplaced: true},
+        {cardIndex:1, canBeReplaced: true},
+        {cardIndex:2, canBeReplaced: true},
+        {cardIndex:3, canBeReplaced: true},
+        {cardIndex:4, canBeReplaced: true},
+        {cardIndex:5, canBeReplaced: true},
+    ]);
+
 
     async function handleAddPoke(value) {
-        if(value && value[0] !== ' ' && currentTeam.length < 6 && !alreadyInTeam(currentTeam, value)) {
+        if(value && value[0] !== ' ' && !alreadyInTeam(currentTeam, value) && teamIsNotFull(currentTeam)) {
             try {
                 const pokeInfo = await axios.get(`https://pokeapi.co/api/v2/pokemon/${value.toLowerCase()}`);
                 let poke = makePokeObject(pokeInfo.data);
                 console.log(poke)
-                setCurrentTeam(oldTeam => [...oldTeam, poke]);
+                setCurrentTeam(oldTeam => {
+                    let replaceableIndex = findFirstReplaceable(oldTeam);
+                    poke.cardIndex = replaceableIndex;
+                    let copy = [...oldTeam];
+                    copy[replaceableIndex] = poke;
+                    return copy;
+                });
             } catch(err) {
                 console.log(err.message)
             } finally {
@@ -27,10 +41,25 @@ function Team({pokeNames, handleSaveTeam}) {
         }
     }
 
+    //Event handlers
+    function handleDeletePoke(poke) {
+        setCurrentTeam(oldTeam => {
+            let replaceableIndex = poke.cardIndex;
+            let copy = [...oldTeam];
+            copy[replaceableIndex] = {cardIndex:poke.cardIndex, canBeReplaced: true};
+            return copy;
+        })
+    }
+
+    //Helper functions
     function alreadyInTeam(teamArr, name) {
         return teamArr.length > 0 
             ? teamArr.some(elem => elem.name == name)
             : false;
+    }
+
+    function teamIsNotFull(teamArr) {
+        return teamArr.some(elem => elem.canBeReplaced == true);
     }
 
     function getTypes(arrOfTypes) {
@@ -44,16 +73,21 @@ function Team({pokeNames, handleSaveTeam}) {
             sprite: data.sprites.front_default, 
             types: getTypes(data.types),
             baseStats: data.stats,
+            canBeReplaced: false,
         }
+    }
+
+    function findFirstReplaceable(oldTeam) {
+        return oldTeam.findIndex(elem => elem.canBeReplaced === true);
     }
 
    return (
        <div>
             <Input pokeNames={pokeNames} handleAddPoke={handleAddPoke}/>
             <div className="bg-gray-400 p-4 w-full mx-auto grid grid-cols-2 justify-items-center gap-5 xs:grid-cols-3 sm:w-4/5 lg:grid-cols-6 lg:w-fit">
-                {arr.map((elem, index) => {
-                    return currentTeam[index] 
-                        ? <Card key={nanoid()} poke={currentTeam[index]}/>
+                {arr.map(elem => {
+                    return !currentTeam[elem].canBeReplaced 
+                        ? <Card key={nanoid()} poke={currentTeam[elem]} handleDeletePoke={handleDeletePoke}/>
                         : <Card key={nanoid()}/>
                 })}
             </div>   

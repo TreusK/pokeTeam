@@ -23,7 +23,7 @@ const typesColors = {
     fairy: 'pink-100'
 }
 
-function Card({poke}) {
+function Card({poke, handleDeletePoke}) {
 
     if(!poke) {
         return(
@@ -38,18 +38,18 @@ function Card({poke}) {
             </div>
         )
     } else { 
-        let bgColor = `bg-${typesColors[poke.types[0]]}`;
+        let bgColor = `bg-${poke.types ? typesColors[poke.types[0]] : 'yellow-200'}`;
         return (
        <div className={`Card w-36 h-48 text-center rounded shadow-lg group ${bgColor}`}>
             <div className='flex relative overflow-hidden'>
-                <p className='mx-auto'>{poke.name[0].toUpperCase() + poke.name.slice(1)}</p>
-                <div className={`w-[26px] h-[26px] absolute -right-3 -top-3 rotate-45 group-hover:bg-red-500`}></div>
+                <p className='mx-auto'>{poke.name ? poke.name[0].toUpperCase() + poke.name.slice(1) : ''}</p>
+                <div onClick={() => handleDeletePoke(poke)} className={`w-[26px] h-[26px] absolute -right-3 -top-3 rotate-45 group-hover:bg-red-500`}></div>
             </div>
             <div className='h-24 flex justify-center bg-gray-100'>
                     <img className='scale-125' src={poke.sprite} alt="mon" />
             </div>
             <div>
-                {poke.types.map(elem => <p className='font-["Bakbak"]' key={nanoid()}>{elem}</p>)}
+                {poke.types ? poke.types.map(elem => <p className='font-["Bakbak"]' key={nanoid()}>{elem}</p>) : 'hola'}
             </div>
        </div>
    )}

@@ -17,6 +17,7 @@ function App() {
     const [pokeNames, setPokeNames] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    //Fetch the names of pokemon to populate search bar
     useEffect(() => {
         async function getPokes() {
             try {
@@ -29,7 +30,6 @@ function App() {
             }
         }
         getPokes();
-        console.log('fetchin');
     }, []); 
 
     function handleSaveTeam(currentTeam) {

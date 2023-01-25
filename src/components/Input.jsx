@@ -7,7 +7,6 @@ function Input({pokeNames, handleAddPoke}) {
 
     function handleInputChange(e) {
         setInput(e.target.value);
-        console.log('chaning input');
     }
      
     let filteredPokes = input.length > 0 
@@ -21,7 +20,7 @@ function Input({pokeNames, handleAddPoke}) {
 
         <div className='p-4'>
             <input type="text" list="pokeNames" value={input} onChange={handleInputChange}
-            placeholder="Enter Here"  className='p-2 border border-solid'/>
+            placeholder="Pikachu"  className='p-2 border border-solid'/>
             <datalist id="pokeNames">
                 {filteredPokes.map(elem => <option key={nanoid()} value={elem.name}>{elem.name}</option>)}
             </datalist>
