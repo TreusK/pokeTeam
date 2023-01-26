@@ -21,7 +21,7 @@ function Team({pokeNames, handleSaveTeam}) {
 
 
     async function handleAddPoke(value) {
-        if(value && value[0] !== ' ' && !alreadyInTeam(currentTeam, value) && teamIsNotFull(currentTeam)) {
+        if(inputIsValid(value) && !alreadyInTeam(currentTeam, value) && teamIsNotFull(currentTeam)) {
             try {
                 const pokeInfo = await axios.get(`https://pokeapi.co/api/v2/pokemon/${value.toLowerCase()}`);
                 let poke = makePokeObject(pokeInfo.data);
@@ -53,13 +53,15 @@ function Team({pokeNames, handleSaveTeam}) {
 
     //Helper functions
     function alreadyInTeam(teamArr, name) {
-        return teamArr.length > 0 
-            ? teamArr.some(elem => elem.name == name)
-            : false;
+        return teamArr.some(elem => elem.name == name)
     }
 
     function teamIsNotFull(teamArr) {
         return teamArr.some(elem => elem.canBeReplaced == true);
+    }
+
+    function inputIsValid(input) {
+        return (input && input[0] !== ' ');
     }
 
     function getTypes(arrOfTypes) {
@@ -92,7 +94,8 @@ function Team({pokeNames, handleSaveTeam}) {
                 })}
             </div>   
             <div className='text-center my-2'>
-                <button className='bg-blue-200 ml-2 rounded p-2 px-6 text-gray-500 hover:bg-blue-300' onClick={() => handleSaveTeam(currentTeam)}>Save team</button>
+                <button className='bg-blue-200 ml-2 rounded p-2 px-6 text-gray-500 hover:bg-blue-300' 
+                        onClick={() => handleSaveTeam(currentTeam, teamIsNotFull)}>Save team</button>
             </div> 
             
         </div>

@@ -32,9 +32,10 @@ function App() {
         getPokes();
     }, []); 
 
-    function handleSaveTeam(currentTeam) {
-        if(currentTeam.length < 6) {
+    function handleSaveTeam(currentTeam, teamIsNotFull) {
+        if(!teamIsNotFull(currentTeam)) {
             setTeams(oldTeams => [...oldTeams, currentTeam])
+            console.log('Saved!')
         }
     }
 
