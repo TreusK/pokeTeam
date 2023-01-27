@@ -8,7 +8,7 @@ import Input from "../components/Input";
 
 const arr = [0, 1, 2, 3, 4, 5];
 
-function Team({ pokeNames, handleSaveTeam }) {
+function Team({ pokeNames, onSaveTeam }) {
   const [currentTeam, setCurrentTeam] = useState([
     { cardIndex: 0, canBeReplaced: true },
     { cardIndex: 1, canBeReplaced: true },
@@ -109,7 +109,7 @@ function Team({ pokeNames, handleSaveTeam }) {
       <div className="text-center my-2">
         <button
           className="bg-blue-200 ml-2 rounded p-2 px-6 text-gray-500 hover:bg-blue-300"
-          onClick={() => handleSaveTeam(currentTeam, teamIsNotFull)}
+          onClick={() => onSaveTeam(currentTeam, teamIsNotFull)}
         >
           Save team
         </button>

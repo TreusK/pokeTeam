@@ -47,9 +47,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route
           path="/team"
-          element={
-            <Team pokeNames={pokeNames} handleSaveTeam={handleSaveTeam} />
-          }
+          element={<Team pokeNames={pokeNames} onSaveTeam={handleSaveTeam} />}
         />
         <Route path="/about" element={<About />} />
       </Routes>
