@@ -1,4 +1,4 @@
-//import './Card.css';
+import './Card.css';
 import { nanoid } from 'nanoid';
 import questionMark from '../assets/questionMark.png'
 
@@ -46,7 +46,7 @@ function Card({ poke, handleDeletePoke }) {
           <p className='mx-auto'>{poke.name ? poke.name[0].toUpperCase() + poke.name.slice(1) : ''}</p>
           <div onClick={() => handleDeletePoke(poke)} className={`w-[26px] h-[26px] absolute -right-3 -top-3 rotate-45 group-hover:bg-red-500`}></div>
         </div>
-        <div className='h-24 flex justify-center bg-gray-100'>
+        <div className='CardImgPattern h-24 flex justify-center'>
           <img className='scale-125' src={poke.sprite} alt="mon" />
         </div>
         <div>
