@@ -31,18 +31,19 @@ function Team({ pokeNames, onSaveTeam }) {
     }
   }
 
-  //Event handlers
-  function handleDeletePoke(poke) {
+  const handleDeletePoke = (poke) => {
     setCurrentTeam((oldTeam) => {
-      let replaceableIndex = poke.cardIndex;
-      let copy = [...oldTeam];
-      copy[replaceableIndex] = {
-        cardIndex: poke.cardIndex,
-        canBeReplaced: true,
-      };
-      return copy;
+      return oldTeam.map((p) => {
+        if (p.cardIndex === poke.cardIndex) {
+          return {
+            cardIndex: poke.cardIndex,
+            canBeReplaced: true,
+          };
+        }
+        return p;
+      });
     });
-  }
+  };
 
   return (
     <div>
@@ -53,7 +54,7 @@ function Team({ pokeNames, onSaveTeam }) {
             <PokeCard
               key={"card" + currentTeam[elem].cardIndex}
               poke={currentTeam[elem]}
-              handleDeletePoke={handleDeletePoke}
+              onDeletePoke={handleDeletePoke}
             />
           ) : (
             <PokeCard key={"card" + currentTeam[elem].cardIndex} />

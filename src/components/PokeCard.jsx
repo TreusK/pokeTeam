@@ -1,4 +1,3 @@
-import { nanoid } from "nanoid";
 import questionMark from "../assets/questionMark.png";
 import Card from "./ui/Card";
 
@@ -23,7 +22,7 @@ const typesColors = {
   fairy: "#D685AD",
 };
 
-export default function PokeCard({ poke, handleDeletePoke }) {
+export default function PokeCard({ poke, onDeletePoke }) {
   const bgColor = poke ? typesColors[poke.types[0]] : "#A8A77A";
 
   if (!poke) {
@@ -47,7 +46,7 @@ export default function PokeCard({ poke, handleDeletePoke }) {
           {poke.name ? poke.name[0].toUpperCase() + poke.name.slice(1) : ""}
         </p>
         <div
-          onClick={() => handleDeletePoke(poke)}
+          onClick={() => onDeletePoke(poke)}
           className={`w-[26px] h-[26px] absolute -right-3 -top-3 rotate-45 group-hover:bg-red-500`}
         />
       </div>
@@ -55,13 +54,11 @@ export default function PokeCard({ poke, handleDeletePoke }) {
         <img className="scale-125" src={poke.sprite} alt="mon" />
       </div>
       <div>
-        {poke.types
-          ? poke.types.map((elem) => (
-              <p className='font-["Bakbak"]' key={nanoid()}>
-                {elem}
-              </p>
-            ))
-          : "hola"}
+        {poke.types?.map((pokeType) => (
+          <p className='font-["Bakbak"]' key={`poke.${poke.id}.${pokeType}`}>
+            {pokeType}
+          </p>
+        ))}
       </div>
     </Card>
   );
