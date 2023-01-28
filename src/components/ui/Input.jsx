@@ -1,5 +1,3 @@
-//import './Input.css';
-
 export default function Input({ label, children, ...rest }) {
   return (
     <div className="mx-auto max-w-3xl text-center">

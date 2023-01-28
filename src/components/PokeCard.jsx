@@ -49,7 +49,7 @@ export default function PokeCard({ poke, handleDeletePoke }) {
         <div
           onClick={() => handleDeletePoke(poke)}
           className={`w-[26px] h-[26px] absolute -right-3 -top-3 rotate-45 group-hover:bg-red-500`}
-        ></div>
+        />
       </div>
       <div className="h-24 flex justify-center bg-gray-100">
         <img className="scale-125" src={poke.sprite} alt="mon" />

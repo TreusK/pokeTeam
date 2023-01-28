@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import PokeCard from "../components/PokeCard";
-import PokeInput from "../components/PokeInput";
+import PokeForm from "../components/PokeForm";
 
 const arr = [0, 1, 2, 3, 4, 5];
 
@@ -9,27 +9,25 @@ function Team({ pokeNames, onSaveTeam }) {
   const [currentTeam, setCurrentTeam] = useState(defaultTeamState);
 
   async function handleAddPoke(value) {
-    if (
-      inputIsValid(value) &&
-      !alreadyInTeam(currentTeam, value) &&
-      teamIsNotFull(currentTeam)
-    ) {
-      try {
-        const pokeInfo = await axios.get(
-          `https://pokeapi.co/api/v2/pokemon/${value.toLowerCase()}`
-        );
-        const poke = makePokeObject(pokeInfo.data);
-        console.log(poke);
-        setCurrentTeam((oldTeam) => {
-          const replaceableIndex = findFirstReplaceable(oldTeam);
-          poke.cardIndex = replaceableIndex;
-          const copy = [...oldTeam];
-          copy[replaceableIndex] = poke;
-          return copy;
-        });
-      } catch (err) {
-        console.log(err.message);
-      }
+    if (alreadyInTeam(currentTeam, value) || !teamIsNotFull(currentTeam)) {
+      return;
+    }
+
+    try {
+      const pokeInfo = await axios.get(
+        `https://pokeapi.co/api/v2/pokemon/${value.toLowerCase()}`
+      );
+      const poke = makePokeObject(pokeInfo.data);
+      console.log(poke);
+      setCurrentTeam((oldTeam) => {
+        const replaceableIndex = findFirstReplaceable(oldTeam);
+        poke.cardIndex = replaceableIndex;
+        const copy = [...oldTeam];
+        copy[replaceableIndex] = poke;
+        return copy;
+      });
+    } catch (err) {
+      console.log(err.message);
     }
   }
 
@@ -48,7 +46,7 @@ function Team({ pokeNames, onSaveTeam }) {
 
   return (
     <div>
-      <PokeInput pokeNames={pokeNames} onAddPoke={handleAddPoke} />
+      <PokeForm pokeNames={pokeNames} onAddPoke={handleAddPoke} />
       <div className="bg-gray-400 p-4 w-full mx-auto grid grid-cols-2 justify-items-center gap-5 xs:grid-cols-3 sm:w-4/5 lg:grid-cols-6 lg:w-fit">
         {arr.map((elem) => {
           return !currentTeam[elem].canBeReplaced ? (
@@ -90,10 +88,6 @@ function alreadyInTeam(teamArr, name) {
 
 function teamIsNotFull(teamArr) {
   return teamArr.some((elem) => elem.canBeReplaced == true);
-}
-
-function inputIsValid(input) {
-  return input && input[0] !== " ";
 }
 
 function getTypes(arrOfTypes) {
