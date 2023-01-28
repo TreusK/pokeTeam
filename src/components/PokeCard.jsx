@@ -45,7 +45,7 @@ export default function PokeCard({ poke, onDeletePoke }) {
         <p className="mx-auto">
           {poke.name ? poke.name[0].toUpperCase() + poke.name.slice(1) : ""}
         </p>
-        <div
+        <button
           onClick={() => onDeletePoke(poke)}
           className={`w-[26px] h-[26px] absolute -right-3 -top-3 rotate-45 group-hover:bg-red-500`}
         />
