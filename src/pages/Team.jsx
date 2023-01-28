@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import Card from "../components/Card";
+import PokeCard from "../components/PokeCard";
 import PokeInput from "../components/PokeInput";
 
 const arr = [0, 1, 2, 3, 4, 5];
@@ -52,13 +52,13 @@ function Team({ pokeNames, onSaveTeam }) {
       <div className="bg-gray-400 p-4 w-full mx-auto grid grid-cols-2 justify-items-center gap-5 xs:grid-cols-3 sm:w-4/5 lg:grid-cols-6 lg:w-fit">
         {arr.map((elem) => {
           return !currentTeam[elem].canBeReplaced ? (
-            <Card
+            <PokeCard
               key={"card" + currentTeam[elem].cardIndex}
               poke={currentTeam[elem]}
               handleDeletePoke={handleDeletePoke}
             />
           ) : (
-            <Card key={"card" + currentTeam[elem].cardIndex} />
+            <PokeCard key={"card" + currentTeam[elem].cardIndex} />
           );
         })}
       </div>
