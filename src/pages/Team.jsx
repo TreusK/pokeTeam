@@ -1,8 +1,5 @@
-//import './Team.css';
 import { useState } from "react";
-import { nanoid } from "nanoid";
 import axios from "axios";
-
 import Card from "../components/Card";
 import Input from "../components/Input";
 
@@ -58,12 +55,12 @@ function Team({ pokeNames, onSaveTeam }) {
         {arr.map((elem) => {
           return !currentTeam[elem].canBeReplaced ? (
             <Card
-              key={nanoid()}
+              key={"card" + currentTeam[elem].cardIndex}
               poke={currentTeam[elem]}
               handleDeletePoke={handleDeletePoke}
             />
           ) : (
-            <Card key={nanoid()} />
+            <Card key={"card" + currentTeam[elem].cardIndex} />
           );
         })}
       </div>
