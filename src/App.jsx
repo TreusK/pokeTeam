@@ -32,12 +32,12 @@ function App() {
     getPokes();
   }, []);
 
-  function handleSaveTeam(currentTeam, teamIsNotFull) {
+  const handleSaveTeam = (currentTeam, teamIsNotFull) => {
     if (!teamIsNotFull(currentTeam)) {
       setTeams((oldTeams) => [...oldTeams, currentTeam]);
       console.log("Saved!");
     }
-  }
+  };
 
   return (
     <div className="h-screen flex flex-col">
