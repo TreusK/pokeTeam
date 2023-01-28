@@ -2,12 +2,8 @@
 import { useState } from "react";
 import { nanoid } from "nanoid";
 
-function Input({ pokeNames, handleAddPoke }) {
+function Input({ pokeNames, onAddPoke }) {
   const [input, setInput] = useState("");
-
-  function handleInputChange(e) {
-    setInput(e.target.value);
-  }
 
   let filteredPokes =
     input.length > 0
@@ -29,7 +25,7 @@ function Input({ pokeNames, handleAddPoke }) {
           type="text"
           list="pokeNames"
           value={input}
-          onChange={handleInputChange}
+          onChange={(e) => setInput(e.target.value)}
           placeholder="Pikachu"
           className="p-2 border border-solid"
         />
@@ -42,7 +38,7 @@ function Input({ pokeNames, handleAddPoke }) {
         </datalist>
         <button
           className="bg-blue-200 ml-2 rounded p-2 px-6 text-gray-500 hover:bg-blue-300"
-          onClick={() => handleAddPoke(input)}
+          onClick={() => onAddPoke(input)}
         >
           Add
         </button>

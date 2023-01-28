@@ -18,19 +18,17 @@ function Team({ pokeNames, onSaveTeam }) {
         const pokeInfo = await axios.get(
           `https://pokeapi.co/api/v2/pokemon/${value.toLowerCase()}`
         );
-        let poke = makePokeObject(pokeInfo.data);
+        const poke = makePokeObject(pokeInfo.data);
         console.log(poke);
         setCurrentTeam((oldTeam) => {
-          let replaceableIndex = findFirstReplaceable(oldTeam);
+          const replaceableIndex = findFirstReplaceable(oldTeam);
           poke.cardIndex = replaceableIndex;
-          let copy = [...oldTeam];
+          const copy = [...oldTeam];
           copy[replaceableIndex] = poke;
           return copy;
         });
       } catch (err) {
         console.log(err.message);
-      } finally {
-        console.log(value);
       }
     }
   }
@@ -50,7 +48,7 @@ function Team({ pokeNames, onSaveTeam }) {
 
   return (
     <div>
-      <Input pokeNames={pokeNames} handleAddPoke={handleAddPoke} />
+      <Input pokeNames={pokeNames} onAddPoke={handleAddPoke} />
       <div className="bg-gray-400 p-4 w-full mx-auto grid grid-cols-2 justify-items-center gap-5 xs:grid-cols-3 sm:w-4/5 lg:grid-cols-6 lg:w-fit">
         {arr.map((elem) => {
           return !currentTeam[elem].canBeReplaced ? (
