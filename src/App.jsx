@@ -32,6 +32,7 @@ function App() {
         getPokes();
     }, []); 
 
+    //event function
     function handleSaveTeam(currentTeam, teamIsNotFull) {
         if(!teamIsNotFull(currentTeam)) {
             setTeams(oldTeams => [...oldTeams, currentTeam])
@@ -46,7 +47,7 @@ function App() {
             <Navbar />
             <Routes>
                 <Route path='/' element={<Home />} />
-                <Route path='/team' element={<Team pokeNames={pokeNames} handleSaveTeam={handleSaveTeam}/>} />
+                <Route path='/team' element={<Team pokeNames={pokeNames} onSaveTeam={handleSaveTeam}/>} />
                 <Route path='/about' element={<About />} />
             </Routes>
         </div>
