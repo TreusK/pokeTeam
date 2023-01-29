@@ -7,7 +7,7 @@ function DroppableCard({ isDropped, pokeInHole }) {
   let bgColor = pokeInHole ? typesColors[pokeInHole.types[0]] : '#A8A77A';
 
   return (
-    <div ref={setNodeRef} className='flex justify-center items-center w-40 h-52 bg-white mx-auto border-dashed border-2 rounded border-sky-500 mb-4' >
+    <div ref={setNodeRef} className='flex justify-center items-center w-40 h-52 bg-white mx-auto border-dashed border-2 rounded border-sky-500 my-8' >
       {!isDropped
         ? 'Drop here'
         : <div className={`Card w-36 h-48 text-center rounded shadow-lg group `} style={{background: bgColor}}>

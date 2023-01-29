@@ -50,13 +50,16 @@ function Team({ pokeNames, onSaveTeam }) {
   //Event handlers
   function handleDeletePoke(poke) {
     console.log('im deletin')
-    setCurrentTeam(oldTeam => {
-      
+    setCurrentTeam(oldTeam => {    
       let replaceableIndex = poke.cardIndex;
       let copy = [...oldTeam];
       copy[replaceableIndex] = { cardIndex: poke.cardIndex, canBeReplaced: true };
       return copy;
     })
+    if(poke.name === pokeInHole.name) {
+      setIsDropped(false);
+      setPokeInHole(null);
+    }   
   }
 
   function handleDragEnd(e) {
@@ -79,12 +82,13 @@ function Team({ pokeNames, onSaveTeam }) {
             : <Card key={`poke${elem}`} poke={currentTeam[elem]} handleDeletePoke={handleDeletePoke} />
         })}
       </div>
+
+      <DroppableCard isDropped={isDropped} pokeInHole={pokeInHole}/>
+
       <div className='text-center my-2'>
         <button className='bg-blue-200 ml-2 rounded p-2 px-6 text-gray-500 hover:bg-blue-300'
           onClick={() => onSaveTeam(currentTeam, teamIsNotFull)}>Save team</button>
       </div>
-
-      <DroppableCard isDropped={isDropped} pokeInHole={pokeInHole}/>
 
     </DndContext>
   )

@@ -13,6 +13,7 @@ import './App.css';
 
 
 function App() {
+    console.log('Im App and im renderin')
     const [teams, setTeams] = useState([]);
     const [pokeNames, setPokeNames] = useState([]);
     const [loading, setLoading] = useState(true);
