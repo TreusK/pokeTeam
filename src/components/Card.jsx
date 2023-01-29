@@ -1,31 +1,16 @@
 import './Card.css';
-import { nanoid } from 'nanoid';
+import { useDraggable } from '@dnd-kit/core';
 import questionMark from '../assets/questionMark.png'
-
-const typesColors = {
-  normal: '#A8A77A',
-  electric: '#F7D02C',
-  fire: '#EE8130',
-  water: '#6390F0',
-  grass: '#7AC74C',
-  ice: '#96D9D6',
-  fighting: '#C22E28',
-  poison: '#A33EA1',
-  ground: '#E2BF65',
-  rock: '#B6A136',
-  flying: '#A98FF3',
-  psychic: '#F95587',
-  bug: '#A6B91A',
-  ghost: '#735797',
-  dark: '#705746',
-  dragon: '#6F35FC',
-  steel: '#B7B7CE',
-  fairy: '#D685AD'
-}
+import { typesColors } from '../assets/helper';
 
 function Card({ poke, handleDeletePoke }) {
+  const {attributes, listeners, setNodeRef, transform} = useDraggable({id: poke ? poke.name : 'none'});
 
   let bgColor = poke ? typesColors[poke.types[0]] : '#A8A77A';
+  const style = transform ? {
+    transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
+    background: bgColor,
+  } : {background: bgColor,};
 
   if (!poke) {
     return (
@@ -41,16 +26,17 @@ function Card({ poke, handleDeletePoke }) {
     )
   } else {
     return (
-        <div className={`Card w-36 h-48 text-center rounded shadow-lg group`} style={{ background: bgColor }}>
+        <div className={`Card w-36 h-48 text-center rounded shadow-lg group z-10`}
+        ref={setNodeRef} style={style}>
           <div className='flex relative overflow-hidden'>
-            <p className='mx-auto'>{poke.name ? poke.name[0].toUpperCase() + poke.name.slice(1) : ''}</p>
+            <p className='mx-auto' {...listeners} {...attributes}>{poke.name ? poke.name[0].toUpperCase() + poke.name.slice(1) : ''}</p>
             <div onClick={() => handleDeletePoke(poke)} className={`w-[26px] h-[26px] absolute -right-3 -top-3 rotate-45 group-hover:bg-red-500`}></div>
           </div>
-          <div className='CardImgPattern h-24 flex justify-center'>
+          <div className='CardImgPattern h-24 flex justify-center' {...listeners} {...attributes}>
             <img className='scale-125' src={poke.sprite} alt="mon" />
           </div>
-          <div>
-            {poke.types ? poke.types.map(elem => <p className='font-["Bakbak"]' key={nanoid()}>{elem}</p>) : 'hola'}
+          <div {...listeners} {...attributes}>
+            {poke.types ? poke.types.map(elem => <p className='font-["Bakbak"]' key={`pokeTypes${elem + poke.name}`}>{elem}</p>) : 'hola'}
           </div>
         </div>
     )

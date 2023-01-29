@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@dnd-kit/core": "^6.0.7",
     "axios": "^1.2.2",
     "nanoid": "^4.0.0",
     "react": "^18.2.0",
