@@ -1,6 +1,9 @@
 import { useDroppable } from '@dnd-kit/core';
 import { typesColors } from '../assets/helper';
 
+import BaseStats from './BaseStats';
+import BaseData from './BaseData';
+
 function DroppableCard({ isDropped, pokeInHole }) {
   const { setNodeRef } = useDroppable({ id: 'droppable' });
 
@@ -10,7 +13,10 @@ function DroppableCard({ isDropped, pokeInHole }) {
     : {background: 'white'}; 
 
   return (
-    <div className='flex flex-col py-12' style={gradientColor}>
+    <div className='grid grid-cols-3 py-12' style={gradientColor}>
+
+      <BaseStats baseStats={pokeInHole?.baseStats}/>
+
       <div ref={setNodeRef} className='flex justify-center items-center w-40 h-52 bg-white mx-auto border-dashed border-2 rounded border-sky-500' >
         {!isDropped
           ? 'Drop here'
@@ -27,6 +33,9 @@ function DroppableCard({ isDropped, pokeInHole }) {
             </div>
         }
       </div >
+
+        <BaseData />
+
     </div>
   )
 }
