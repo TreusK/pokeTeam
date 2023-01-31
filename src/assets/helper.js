@@ -43,6 +43,8 @@ function makePokeObject(data) {
       sprite: data.sprites.front_default, 
       types: getTypes(data.types),
       baseStats: data.stats,
+      height: data.height,
+      weight: data.weight,
       canBeReplaced: false,
   }
 }
