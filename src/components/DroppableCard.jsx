@@ -4,9 +4,8 @@ import { typesColors } from '../assets/helper';
 import BaseStats from './BaseStats';
 import BaseData from './BaseData';
 
-function DroppableCard({ isDropped, pokeInHole }) {
+function DroppableCard({ isDropped, pokeInHole, onSaveMoves }) {
   const { setNodeRef } = useDroppable({ id: 'droppable' });
-
   let bgColor = pokeInHole ? typesColors[pokeInHole.types[0]] : '#A8A77A';
   let gradientColor = pokeInHole
     ? { background: `linear-gradient(#ffffff 30%, ${bgColor} 99%)` }
@@ -35,7 +34,7 @@ function DroppableCard({ isDropped, pokeInHole }) {
           }
         </div >
 
-        <BaseData baseData={pokeInHole}/>
+        <BaseData pokeInHole={pokeInHole} onSaveMoves={onSaveMoves}/>
       </div>
 
     </div>

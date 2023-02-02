@@ -45,6 +45,8 @@ function makePokeObject(data) {
       baseStats: data.stats,
       height: data.height,
       weight: data.weight,
+      allMoves: data.moves,
+      moves: ['', '', '', ''],
       canBeReplaced: false,
   }
 }

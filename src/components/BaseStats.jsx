@@ -9,7 +9,7 @@ function BaseStats({ pokeInHole }) {
     {stat: 'Speed', value: pokeInHole.baseStats[5].base_stat},
   ] : undefined;
   return (
-    <div className='w-[300px] pl-6 mr-6 flex flex-col items-center justify-center gap-1'>
+    <div className='w-[350px] pl-6 mr-6 flex flex-col items-center justify-center gap-1'>
       {pokeInHole
         ? stats.map(elem => 
           <div key={pokeInHole.name+elem.stat} className='flex flex-wrap w-full'>

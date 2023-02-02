@@ -14,6 +14,7 @@ import { alreadyInTeam, teamIsNotFull, inputIsValid, makePokeObject, findFirstRe
 const arr = [0, 1, 2, 3, 4, 5];
 
 function Team({ pokeNames, onSaveTeam }) {
+  console.log('renderin Team')
   const [isDropped, setIsDropped] = useState(false);
   const [pokeInHole, setPokeInHole] = useState(null);
   const [currentTeam, setCurrentTeam] = useState([
@@ -62,6 +63,19 @@ function Team({ pokeNames, onSaveTeam }) {
     }
   }
 
+  function handleSaveMoves(moves) {
+    console.log(moves);
+    console.log(pokeInHole);
+    let pokeInHoleCopy = Object.assign({}, pokeInHole);
+    pokeInHoleCopy.moves = [...moves];
+    setCurrentTeam(oldTeam => {
+      let replaceableIndex = pokeInHole.cardIndex;
+      let copy = [...oldTeam];
+      copy[replaceableIndex] = pokeInHoleCopy;
+      return copy;
+    })
+  }
+
   function handleDragEnd(e) {
     if (e.over) {
       let pokeCopy = currentTeam.find(poke => poke.name == e.active.id);
@@ -88,7 +102,7 @@ function Team({ pokeNames, onSaveTeam }) {
           onClick={() => onSaveTeam(currentTeam, teamIsNotFull)}>Save team</button>
       </div>
 
-      <DroppableCard isDropped={isDropped} pokeInHole={pokeInHole} />
+      <DroppableCard isDropped={isDropped} pokeInHole={pokeInHole} onSaveMoves={handleSaveMoves}/>
 
     </DndContext>
   )
