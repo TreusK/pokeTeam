@@ -41,6 +41,7 @@ function makePokeObject(data) {
       id: data.id, 
       name: data.name,    
       sprite: data.sprites.front_default, 
+      icon: data.sprites.versions["generation-viii"].icons.front_default,
       types: getTypes(data.types),
       baseStats: data.stats,
       height: data.height,
@@ -51,8 +52,18 @@ function makePokeObject(data) {
   }
 }
 
+function teamAlreadyExists(teamsArr, currentTeam) {
+  let currentTeamID = currentTeam.map(poke => poke.id).join('');
+  let IDIsRepeated = false;
+  for(let team of teamsArr) {
+    let thisTeamID = team.team.map(poke => poke.id).join('');
+    if(thisTeamID == currentTeamID) IDIsRepeated = true;
+  }
+  return IDIsRepeated;
+}
+
 function findFirstReplaceable(oldTeam) {
   return oldTeam.findIndex(elem => elem.canBeReplaced === true);
 }
 
-export {typesColors, alreadyInTeam, teamIsNotFull, inputIsValid, makePokeObject, findFirstReplaceable}
+export {typesColors, alreadyInTeam, teamIsNotFull, inputIsValid, makePokeObject, findFirstReplaceable, teamAlreadyExists}

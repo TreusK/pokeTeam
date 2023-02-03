@@ -13,18 +13,19 @@ import { alreadyInTeam, teamIsNotFull, inputIsValid, makePokeObject, findFirstRe
 
 const arr = [0, 1, 2, 3, 4, 5];
 
-function Team({ pokeNames, onSaveTeam }) {
-  console.log('renderin Team')
+function Team({ pokeNames, onSaveTeam, globalCurrentTeam }) {
   const [isDropped, setIsDropped] = useState(false);
   const [pokeInHole, setPokeInHole] = useState(null);
-  const [currentTeam, setCurrentTeam] = useState([
+  const [currentTeam, setCurrentTeam] = useState(globalCurrentTeam.length !== 0 
+      ? globalCurrentTeam 
+      : [
     { cardIndex: 0, canBeReplaced: true },
     { cardIndex: 1, canBeReplaced: true },
     { cardIndex: 2, canBeReplaced: true },
     { cardIndex: 3, canBeReplaced: true },
     { cardIndex: 4, canBeReplaced: true },
     { cardIndex: 5, canBeReplaced: true },
-  ]);
+    ]);
 
 
   async function handleAddPoke(value) {
