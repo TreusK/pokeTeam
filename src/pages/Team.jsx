@@ -7,24 +7,31 @@ import { DndContext } from '@dnd-kit/core';
 import Card from '../components/Card';
 import Input from '../components/Input';
 import DroppableCard from '../components/DroppableCard';
+import Notification from '../components/Notification';
 
-import { alreadyInTeam, teamIsNotFull, inputIsValid, makePokeObject, findFirstReplaceable } from '../assets/helper';
+import { alreadyInTeam, teamIsNotFull, teamAlreadyExists, inputIsValid, makePokeObject, findFirstReplaceable } from '../assets/helper';
 
 
 const arr = [0, 1, 2, 3, 4, 5];
 
-function Team({ pokeNames, onSaveTeam, globalCurrentTeam }) {
+function Team({ pokeNames, onSaveTeam, globalCurrentTeam, teams }) {
   const [isDropped, setIsDropped] = useState(false);
   const [pokeInHole, setPokeInHole] = useState(null);
-  const [currentTeam, setCurrentTeam] = useState(globalCurrentTeam.length !== 0 
-      ? globalCurrentTeam 
-      : [
-    { cardIndex: 0, canBeReplaced: true },
-    { cardIndex: 1, canBeReplaced: true },
-    { cardIndex: 2, canBeReplaced: true },
-    { cardIndex: 3, canBeReplaced: true },
-    { cardIndex: 4, canBeReplaced: true },
-    { cardIndex: 5, canBeReplaced: true },
+  const [notif, setNotif] = useState({
+    show: false,
+    type: '',
+    head: '',
+    body: '',
+  });
+  const [currentTeam, setCurrentTeam] = useState(globalCurrentTeam.length !== 0
+    ? globalCurrentTeam
+    : [
+      { cardIndex: 0, canBeReplaced: true },
+      { cardIndex: 1, canBeReplaced: true },
+      { cardIndex: 2, canBeReplaced: true },
+      { cardIndex: 3, canBeReplaced: true },
+      { cardIndex: 4, canBeReplaced: true },
+      { cardIndex: 5, canBeReplaced: true },
     ]);
 
 
@@ -42,7 +49,7 @@ function Team({ pokeNames, onSaveTeam, globalCurrentTeam }) {
         });
       } catch (err) {
         console.log(err.message)
-      } 
+      }
     }
   }
 
@@ -80,6 +87,51 @@ function Team({ pokeNames, onSaveTeam, globalCurrentTeam }) {
     }
   }
 
+  function handleSaveTeamLocal() {
+    if (teamAlreadyExists(teams, currentTeam)) {
+      setNotif({
+        show: true,
+        type: 'warning',
+        head: 'Bzzt',
+        body: 'A team with all the same pokemon already exists!',
+      });
+      return;
+    }
+    if (teams.length >= 3) {
+      setNotif({
+        show: true,
+        type: 'warning',
+        head: 'Bzzt',
+        body: '3 is the maximum amount of teams, please delete one to add another',
+      });
+      return;
+    }
+    if (teamIsNotFull(currentTeam)) {
+      setNotif({
+        show: true,
+        type: 'warning',
+        head: 'Bzzt',
+        body: 'It needs to have 6 pokemon',
+      });
+      return;
+    }
+    setNotif({
+      show: true,
+      type: 'positive',
+      head: 'Saved!',
+      body: 'Go to Home to see all your teams',
+    });
+    onSaveTeam(currentTeam);
+  }
+
+  function handleNotifClick() {
+    setNotif({
+      show: false,
+      type: '',
+      head: '',
+      body: '',
+    })
+  }
 
 
   return (
@@ -95,10 +147,12 @@ function Team({ pokeNames, onSaveTeam, globalCurrentTeam }) {
 
       <div className='text-center my-1'>
         <button className='bg-blue-200 ml-2 rounded p-1 px-4 text-gray-500 hover:bg-blue-300'
-          onClick={() => onSaveTeam(currentTeam, teamIsNotFull)}>Save team</button>
+          onClick={handleSaveTeamLocal}>Save team</button>
       </div>
 
-      <DroppableCard isDropped={isDropped} pokeInHole={pokeInHole} onSaveMoves={handleSaveMoves}/>
+      {notif.show && <Notification typeOfNotif={notif.type} messageHead={notif.head} messageBody={notif.body} onNotifClick={handleNotifClick}/>}
+
+      <DroppableCard isDropped={isDropped} pokeInHole={pokeInHole} onSaveMoves={handleSaveMoves} />
 
     </DndContext>
   )

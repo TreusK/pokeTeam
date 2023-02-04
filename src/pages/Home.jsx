@@ -22,7 +22,7 @@ function Home({ teams, onSeeTeamClick, onDeleteTeamClick, onTeamMakerClick }) {
           <h2 className='text-center'>My teams</h2>
           <div className='flex gap-2 pt-10 pb-20'>
             {teams.map(elem =>
-              <div className='w-40 border border-red-500 hover:border-blue-500 text-center'>
+              <div key={elem.teamName} className='w-40 border border-red-500 hover:border-blue-500 text-center'>
                 <p>{elem.teamName ? elem.teamName : ''}</p>
                 <img className='mx-auto' src={elem.team[0].icon} />
                 <div className='flex'>

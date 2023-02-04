@@ -17,7 +17,7 @@ function DroppableCard({ isDropped, pokeInHole, onSaveMoves }) {
       <div className='droppableContentContainer mx-auto flex flex-col items-center gap-10 lg:flex-row lg:w-fit'>
         <BaseStats pokeInHole={pokeInHole} />
 
-        <div ref={setNodeRef} className='flex justify-center items-center order-1 lg:order-2 w-40 h-52 bg-white mx-auto border-dashed border-2 rounded border-sky-500' >
+        <div ref={setNodeRef} className='select-none flex justify-center items-center order-1 lg:order-2 w-40 h-52 bg-white mx-auto border-dashed border-2 rounded border-sky-500' >
           {!isDropped
             ? 'Drop here'
             : <div className={`Card w-36 h-48 text-center rounded shadow-lg group `} style={{ background: bgColor }}>
