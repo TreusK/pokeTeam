@@ -14,7 +14,7 @@ import {teamAlreadyExists} from './assets/helper';
 
 
 function App() {
-    const [teams, setTeams] = useState([]);
+    const [teams, setTeams] = useState(JSON.parse(localStorage.getItem('teams')) || []);
     const [pokeNames, setPokeNames] = useState([]);
     const [globalCurrentTeam, setGlobalCurrentTeam] = useState([])
     const [loading, setLoading] = useState(true);
@@ -36,9 +36,13 @@ function App() {
 
     //Event functions
     function handleSaveTeam(currentTeam, teamIsNotFull) {
-        if(!teamIsNotFull(currentTeam) && !teamAlreadyExists(teams, currentTeam)) {
+        if(!teamIsNotFull(currentTeam)) {
+            if(teamAlreadyExists(teams, currentTeam)) {
+              alert('A team with the same pokemon already exists!');
+              return;
+            }
             if(teams.length > 4) {
-              alert('4 is the maximum amount of teams, please delete one to add another');
+              alert('5 is the maximum amount of teams, please delete one to add another');
               return;
             }
             let teamsNumber = teams.length + 1;
@@ -48,17 +52,26 @@ function App() {
             }
             setTeams(oldTeams => [...oldTeams, obj])
             setGlobalCurrentTeam(currentTeam);
-            console.log('Saved!')
+            localStorage.setItem('teams', JSON.stringify(teams));
         }
     }
 
-    function handleSeeClick(teamName) {
+    function handleSeeTeamClick(teamName) {
       let foundTeam = teams.find(team => team.teamName === teamName);
       setGlobalCurrentTeam(foundTeam.team);
     }
 
+    function handleDeleteTeamClick(teamName) {
+      setTeams(oldTeams => {
+        let oldTeamsCopy = [...oldTeams];
+        let filteredCopy = oldTeamsCopy.filter(team => team.teamName !== teamName);
+        filteredCopy.map((elem, index) => elem.teamName = `Team ${index+1}`);
+        return filteredCopy;
+      })
+      setGlobalCurrentTeam([]);
+    }
+
     function handleTeamMakerClick() {
-      console.log('clicked')
       setGlobalCurrentTeam([]);
     }
 
@@ -68,7 +81,8 @@ function App() {
             <Header />
             <Navbar />
             <Routes>
-                <Route path='/' element={<Home teams={teams} onSeeClick={handleSeeClick} onTeamMakerClick={handleTeamMakerClick} />}  />
+                <Route path='/' element={<Home teams={teams} onSeeTeamClick={handleSeeTeamClick} 
+                  onDeleteTeamClick={handleDeleteTeamClick} onTeamMakerClick={handleTeamMakerClick} />}  />
                 <Route path='/team' element={<Team pokeNames={pokeNames} onSaveTeam={handleSaveTeam} globalCurrentTeam={globalCurrentTeam}/>} />
                 <Route path='/about' element={<About />} />
             </Routes>

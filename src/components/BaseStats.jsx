@@ -9,12 +9,12 @@ function BaseStats({ pokeInHole }) {
     {stat: 'Speed', value: pokeInHole.baseStats[5].base_stat},
   ] : undefined;
   return (
-    <div className='w-[350px] pl-6 mr-6 flex flex-col items-center justify-center gap-1'>
+    <div className='lg:w-[350px] order-3 lg:order-3 pl-6 flex flex-col items-center justify-center gap-1'>
       {pokeInHole
         ? stats.map(elem => 
           <div key={pokeInHole.name+elem.stat} className='flex flex-wrap w-full'>
             <p className={`w-[50px]`}>{elem.stat}</p>
-            <div className='bg-red-400' style={{width: elem.value + 'px'}}>
+            <div className='rounded-xl bg-zinc-400 text-stone-600' style={{width: elem.value + 'px'}}>
               <p className='ml-2'>{elem.value}</p>
             </div>
           </div>,

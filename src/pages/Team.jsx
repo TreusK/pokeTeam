@@ -33,7 +33,6 @@ function Team({ pokeNames, onSaveTeam, globalCurrentTeam }) {
       try {
         const pokeInfo = await axios.get(`https://pokeapi.co/api/v2/pokemon/${value.toLowerCase()}`);
         let poke = makePokeObject(pokeInfo.data);
-        console.log(poke)
         setCurrentTeam(oldTeam => {
           let replaceableIndex = findFirstReplaceable(oldTeam);
           poke.cardIndex = replaceableIndex;
@@ -43,9 +42,7 @@ function Team({ pokeNames, onSaveTeam, globalCurrentTeam }) {
         });
       } catch (err) {
         console.log(err.message)
-      } finally {
-        console.log(value)
-      }
+      } 
     }
   }
 
@@ -65,8 +62,6 @@ function Team({ pokeNames, onSaveTeam, globalCurrentTeam }) {
   }
 
   function handleSaveMoves(moves) {
-    console.log(moves);
-    console.log(pokeInHole);
     let pokeInHoleCopy = Object.assign({}, pokeInHole);
     pokeInHoleCopy.moves = [...moves];
     setCurrentTeam(oldTeam => {

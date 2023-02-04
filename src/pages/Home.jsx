@@ -1,7 +1,7 @@
 //import './Home.css';
 import { Link } from 'react-router-dom';
 
-function Home({ teams, onSeeClick, onTeamMakerClick }) {
+function Home({ teams, onSeeTeamClick, onDeleteTeamClick, onTeamMakerClick }) {
 
   return (
     <div className='flex flex-col items-center justify-center bg-red-100 flex-1'>
@@ -26,8 +26,8 @@ function Home({ teams, onSeeClick, onTeamMakerClick }) {
                 <p>{elem.teamName ? elem.teamName : ''}</p>
                 <img className='mx-auto' src={elem.team[0].icon} />
                 <div className='flex'>
-                  <Link className='flex-1 p-2 bg-blue-300' onClick={() => onSeeClick(elem.teamName)} to='/team'>See</Link>
-                  <button className='flex-1 p-2 bg-red-300'>Delete</button>
+                  <Link className='flex-1 p-2 bg-blue-300' onClick={() => onSeeTeamClick(elem.teamName)} to='/team'>See</Link>
+                  <button className='flex-1 p-2 bg-red-300' onClick={() => onDeleteTeamClick(elem.teamName)}>Delete</button>
                 </div>
               </div>)}
           </div>
