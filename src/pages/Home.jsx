@@ -1,5 +1,5 @@
-//import './Home.css';
 import { Link } from 'react-router-dom';
+import pokeball from '../assets/pokeball.png';
 
 function Home({ teams, onSeeTeamClick, onDeleteTeamClick, onTeamMakerClick }) {
 
@@ -18,20 +18,20 @@ function Home({ teams, onSeeTeamClick, onDeleteTeamClick, onTeamMakerClick }) {
       </div>
 
       {teams.length > 0
-        ? <div>
-          <h2 className='text-center'>My teams</h2>
-          <div className='flex gap-2 pt-10 pb-20'>
-            {teams.map(elem =>
-              <div key={elem.teamName} className='w-40 border border-red-500 hover:border-blue-500 text-center'>
-                <p>{elem.teamName ? elem.teamName : ''}</p>
-                <img className='mx-auto' src={elem.team[0].icon} />
-                <div className='flex'>
-                  <Link className='flex-1 p-2 bg-blue-300' onClick={() => onSeeTeamClick(elem.teamName)} to='/team'>See</Link>
-                  <button className='flex-1 p-2 bg-red-300' onClick={() => onDeleteTeamClick(elem.teamName)}>Delete</button>
-                </div>
-              </div>)}
+        ? <div className='bg-gray-200 w-full pt-10'>
+            <h2 className='text-center text-xl'>My teams</h2>
+            <div className='flex flex-col items-center bg-blue-200 gap-20 pt-10 pb-20 md:flex-row md:justify-center'>
+              {teams.map(elem =>
+                <div key={elem.teamName} className='flex flex-col justify-between bg-cover group w-[200px] h-[200px] text-center' style={{backgroundImage: `url(${pokeball})`}}>
+                  <p className='relative -top-6'>{elem.teamName}</p>
+                  <img className='group-hover:animate-bounce mx-auto' src={elem.team[0].icon} />
+                  <div className='relative flex -bottom-10'>
+                    <Link className='flex-1 p-2 bg-blue-300 hover:bg-blue-500' onClick={() => onSeeTeamClick(elem.teamName)} to='/team'>See</Link>
+                    <button className='flex-1 p-2 bg-red-300 hover:bg-red-500' onClick={() => onDeleteTeamClick(elem.teamName)}>Delete</button>
+                  </div>
+                </div>)}
+            </div>
           </div>
-        </div>
         : ''}
     </div>
   )
