@@ -30,7 +30,7 @@ function Card({ poke, handleDeletePoke }) {
         ref={setNodeRef} style={style}>
           <div className='flex relative overflow-hidden'>
             <p className='mx-auto' {...listeners} {...attributes}>{poke.name ? poke.name[0].toUpperCase() + poke.name.slice(1) : ''}</p>
-            <div onClick={() => handleDeletePoke(poke)} className={`w-[26px] h-[26px] absolute -right-3 -top-3 rotate-45 group-hover:bg-red-500`}></div>
+            <div onClick={() => handleDeletePoke(poke)} className={`w-[26px] h-[26px] absolute -right-3 -top-3 rotate-45 cursor-pointer group-hover:bg-red-500`}></div>
           </div>
           <div className='CardImgPattern h-24 flex justify-center' {...listeners} {...attributes}>
             <img className='scale-125' src={poke.sprite} alt="mon" />

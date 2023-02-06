@@ -14,7 +14,7 @@ function BaseStats({ pokeInHole }) {
         ? stats.map(elem => 
           <div key={pokeInHole.name+elem.stat} className='flex flex-wrap w-full'>
             <p className={`w-[50px]`}>{elem.stat}</p>
-            <div className='rounded-xl bg-zinc-400 text-stone-600' style={{width: elem.value + 'px'}}>
+            <div className='gradientStat rounded-xl text-black' style={{width: elem.value + 'px'}}>
               <p className='ml-2'>{elem.value}</p>
             </div>
           </div>,

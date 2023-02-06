@@ -1,6 +1,5 @@
 //import './Team.css';
 import { useState } from 'react';
-import { nanoid } from 'nanoid';
 import axios from 'axios';
 import { DndContext } from '@dnd-kit/core';
 
@@ -137,7 +136,7 @@ function Team({ pokeNames, onSaveTeam, globalCurrentTeam, teams }) {
   return (
     <DndContext onDragEnd={handleDragEnd}>
       <Input pokeNames={pokeNames} handleAddPoke={handleAddPoke} />
-      <div className="bg-gray-400 p-4 w-full mx-auto grid grid-cols-2 justify-items-center gap-5 xs:grid-cols-3 sm:w-4/5 lg:grid-cols-6 lg:w-fit">
+      <div className="bg-gray-300 p-4 w-full mx-auto grid grid-cols-2 justify-items-center gap-5 xs:grid-cols-3 sm:w-4/5 lg:grid-cols-6 lg:w-fit">
         {arr.map(elem => {
           return currentTeam[elem].canBeReplaced
             ? <Card key={`empty${elem}`} />
@@ -146,7 +145,7 @@ function Team({ pokeNames, onSaveTeam, globalCurrentTeam, teams }) {
       </div>
 
       <div className='text-center my-1'>
-        <button className='bg-blue-200 ml-2 rounded p-1 px-4 text-gray-500 hover:bg-blue-300'
+        <button className='border-solid border-2 border-[#74b9ff] hover:bg-[#74b9ff] cursor-pointer hover:text-white text-gray-700 rounded px-2 py-1'
           onClick={handleSaveTeamLocal}>Save team</button>
       </div>
 

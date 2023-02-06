@@ -36,7 +36,7 @@ function BaseData({ pokeInHole, onSaveMoves }) {
   }
 
   return (
-    <div className='w-[350px] order-2 lg:order-1 flex items-center justify-center'>
+    <div className='w-[350px] order-2 lg:order-1 flex items-center justify-center lg:justify-end lg:pr-6'>
       {pokeInHole
         ? <div className='flex flex-col gap-1'>
           <input placeholder='Move 1' id='moveInput1' value={move1 ? move1[0].toUpperCase() + move1.slice(1) : ''} onChange={handleInputChange} type="text" list="move1" className='p-1 border border-solid' />

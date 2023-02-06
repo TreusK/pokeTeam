@@ -1,6 +1,4 @@
-//import './Input.css';
 import { useState } from 'react';
-import {nanoid} from 'nanoid';
 
 function Input({pokeNames, handleAddPoke}) {
     const [input, setInput] = useState('');
@@ -24,7 +22,7 @@ function Input({pokeNames, handleAddPoke}) {
             <datalist id="pokeNames">
                 {filteredPokes.map(elem => <option key={elem.name+'option'} value={elem.name}>{elem.name}</option>)}
             </datalist>
-            <button className='bg-blue-200 ml-2 rounded p-2 px-6 text-gray-500 hover:bg-blue-300'
+            <button className='border-solid border-2 border-[#74b9ff] hover:bg-[#74b9ff] cursor-pointer hover:text-white rounded p-2 px-6 ml-2 text-gray-700'
                     onClick={() => handleAddPoke(input)}>Add</button>
         </div>
 
