@@ -3,16 +3,16 @@ import { NavLink } from 'react-router-dom';
 
 function Navbar() {
    return (
-       <div className='p-2 bg-gray-200 flex border-b-4 space-x-4'>
+       <div className='p-2 pl-8 bg-[#2d3436] text-white flex space-x-4'>
             <NavLink to='/' style={({ isActive }) => 
-                      (isActive ? {borderBottom: 'solid 4px #606060'} : {})}
-                      className='border-4 text-[#2d3436] px-2 py-1 hover:bg-[#606060] hover:border-b-[#606060] hover:text-white'>Home</NavLink>
+                      (isActive ? {borderBottom: 'solid 2px white'} : {})}
+                      className='text-white px-2 py-1 hover:bg-white hover:text-black'>Home</NavLink>
             <NavLink to='/team' style={({ isActive }) => 
-                      (isActive ? {borderBottom: 'solid 4px #606060'} : {})}
-                      className='border-4 text-[#2d3436] px-2 py-1 hover:bg-[#606060] hover:border-b-[#606060] hover:text-white'>Team</NavLink>
+                      (isActive ? {borderBottom: 'solid 2px white'} : {})}
+                      className='text-white px-2 py-1 hover:bg-white hover:text-black'>Team</NavLink>
             <NavLink to='/about' style={({ isActive }) => 
-                      (isActive ? {borderBottom: 'solid 4px #606060'} : {})}
-                      className='border-4 text-[#606060] px-2 py-1 hover:bg-[#606060] hover:border-b-[#606060] hover:text-white'>About</NavLink>
+                      (isActive ? {borderBottom: 'solid 2px white'} : {})}
+                      className='text-white px-2 py-1 hover:bg-white hover:text-black'>About</NavLink>
        </div>
    )
 }
