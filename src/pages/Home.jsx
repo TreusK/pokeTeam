@@ -19,7 +19,7 @@ function Home({ teams, onSeeTeamClick, onDeleteTeamClick, onTeamMakerClick }) {
         </ul>
       </div>
 
-      {teams.length > 0
+      {teams && teams.length > 0
         ? <div className='w-full'>
             <h2 className='py-5 text-center border-t-4 border-[#2d3436] sm:w-[500px] mx-auto text-xl'>My teams</h2>
             <div className='flex flex-col items-center bg-[#2d3436] gap-28 md:gap-20 pt-10 pb-20 lg:px-20 md:flex-row md:justify-center'>

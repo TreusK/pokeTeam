@@ -83,7 +83,7 @@ function App() {
     <div className='min-h-screen flex flex-col'>
       <Header />
       <Navbar />
-      <Routes basename="pokeTeam">
+      <Routes>
         <Route path='/' index element={<Home teams={teams} onSeeTeamClick={handleSeeTeamClick}
           onDeleteTeamClick={handleDeleteTeamClick} onTeamMakerClick={handleTeamMakerClick} />} />
         <Route path='/team' element={<Team pokeNames={pokeNames} teams={teams} onSaveTeam={handleSaveTeam} 
