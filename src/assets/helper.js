@@ -36,6 +36,10 @@ function getTypes(arrOfTypes) {
   return arrOfTypes.map(typeObj => typeObj.type.name);
 }
 
+function createGradient(color1, color2) {
+  return `linear-gradient(to right, ${color1}, ${color2})`;
+}
+
 function makePokeObject(data) {
   return {
       id: data.id, 
@@ -66,4 +70,5 @@ function findFirstReplaceable(oldTeam) {
   return oldTeam.findIndex(elem => elem.canBeReplaced === true);
 }
 
-export {typesColors, alreadyInTeam, teamIsNotFull, inputIsValid, makePokeObject, findFirstReplaceable, teamAlreadyExists}
+export {typesColors, alreadyInTeam, teamIsNotFull, inputIsValid, makePokeObject, 
+  findFirstReplaceable, teamAlreadyExists, createGradient}

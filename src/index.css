@@ -17,6 +17,20 @@
     src: local('Bakbak'), url('/src/assets/fonts/BakbakOne-Regular.ttf') format('truetype');
 }
 
+@font-face {
+    font-family: 'Play';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Play'), url('/src/assets/fonts/Play-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'JosefinSans';
+    font-style: normal;
+    font-weight: normal;
+    src: local('JosefinSans'), url('/src/assets/fonts/JosefinSans-Regular.ttf') format('truetype');
+}
+
 body {
     font-family: Kanit, sans-serif;
 }

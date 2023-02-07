@@ -96,21 +96,21 @@ function Team({ pokeNames, onSaveTeam, globalCurrentTeam, teams }) {
       });
       return;
     }
-    if (teams.length >= 3) {
-      setNotif({
-        show: true,
-        type: 'warning',
-        head: 'Bzzt',
-        body: '3 is the maximum amount of teams, please delete one to add another',
-      });
-      return;
-    }
     if (teamIsNotFull(currentTeam)) {
       setNotif({
         show: true,
         type: 'warning',
         head: 'Bzzt',
         body: 'It needs to have 6 pokemon',
+      });
+      return;
+    }
+    if (teams.length >= 3) {
+      setNotif({
+        show: true,
+        type: 'warning',
+        head: 'Bzzt',
+        body: '3 is the maximum amount of teams, please delete one to add another',
       });
       return;
     }
