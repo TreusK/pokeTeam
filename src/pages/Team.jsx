@@ -25,12 +25,12 @@ function Team({ pokeNames, onSaveTeam, onEditTeam, globalCurrentTeam, teams }) {
   const [currentTeam, setCurrentTeam] = useState(globalCurrentTeam.length !== 0
     ? globalCurrentTeam
     : [
-      { cardIndex: 0, canBeReplaced: true },
-      { cardIndex: 1, canBeReplaced: true },
-      { cardIndex: 2, canBeReplaced: true },
-      { cardIndex: 3, canBeReplaced: true },
-      { cardIndex: 4, canBeReplaced: true },
-      { cardIndex: 5, canBeReplaced: true },
+      { cardIndex: 0, name: 'NoPoke', canBeReplaced: true },
+      { cardIndex: 1, name: 'NoPoke', canBeReplaced: true },
+      { cardIndex: 2, name: 'NoPoke', canBeReplaced: true },
+      { cardIndex: 3, name: 'NoPoke', canBeReplaced: true },
+      { cardIndex: 4, name: 'NoPoke', canBeReplaced: true },
+      { cardIndex: 5, name: 'NoPoke', canBeReplaced: true },
     ]);
 
 
@@ -57,7 +57,7 @@ function Team({ pokeNames, onSaveTeam, onEditTeam, globalCurrentTeam, teams }) {
     setCurrentTeam(oldTeam => {
       let replaceableIndex = poke.cardIndex;
       let copy = [...oldTeam];
-      copy[replaceableIndex] = { cardIndex: poke.cardIndex, canBeReplaced: true };
+      copy[replaceableIndex] = { cardIndex: poke.cardIndex, name: 'NoPoke', canBeReplaced: true };
       return copy;
     })
     if (pokeInHole && poke.name === pokeInHole.name) {

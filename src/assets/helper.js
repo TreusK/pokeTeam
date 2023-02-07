@@ -21,7 +21,7 @@ const typesColors = {
 
 //Helper functions
 function alreadyInTeam(teamArr, name) {
-  return teamArr.some(elem => elem.name == name)
+  return teamArr.some(elem => elem.name.toLowerCase() == name.toLowerCase())
 }
 
 function teamIsNotFull(teamArr) {

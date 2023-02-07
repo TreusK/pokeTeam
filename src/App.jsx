@@ -14,7 +14,7 @@ import './App.css';
 let isFirstRender = true;
 
 function App() {
-  const [teams, setTeams] = useState(JSON.parse(localStorage.getItem('teams')));
+  const [teams, setTeams] = useState(JSON.parse(localStorage.getItem('teams')) || []);
   const [pokeNames, setPokeNames] = useState([]);
   const [globalCurrentTeam, setGlobalCurrentTeam] = useState([]);
 
