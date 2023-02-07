@@ -1,8 +1,7 @@
 
 function Header() {
    return (
-       <div className="bg-red-400 p-6">
-           <h1>Hi Header</h1>
+       <div className="bg-red-400 h-16">
        </div>
    )
 }
