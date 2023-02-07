@@ -16,8 +16,7 @@ let isFirstRender = true;
 function App() {
   const [teams, setTeams] = useState(JSON.parse(localStorage.getItem('teams')));
   const [pokeNames, setPokeNames] = useState([]);
-  const [globalCurrentTeam, setGlobalCurrentTeam] = useState([])
-  const [loading, setLoading] = useState(true);
+  const [globalCurrentTeam, setGlobalCurrentTeam] = useState([]);
 
   //Fetch the names of pokemon to populate search bar
   useEffect(() => {
@@ -27,8 +26,6 @@ function App() {
         setPokeNames(response.data.results);
       } catch (err) {
         console.log(err.message)
-      } finally {
-        setLoading(false);
       }
     }
     getPokes();
@@ -86,8 +83,8 @@ function App() {
     <div className='min-h-screen flex flex-col'>
       <Header />
       <Navbar />
-      <Routes>
-        <Route path='/' element={<Home teams={teams} onSeeTeamClick={handleSeeTeamClick}
+      <Routes basename="pokeTeam">
+        <Route path='/' index element={<Home teams={teams} onSeeTeamClick={handleSeeTeamClick}
           onDeleteTeamClick={handleDeleteTeamClick} onTeamMakerClick={handleTeamMakerClick} />} />
         <Route path='/team' element={<Team pokeNames={pokeNames} teams={teams} onSaveTeam={handleSaveTeam} 
           globalCurrentTeam={globalCurrentTeam} onEditTeam={handleEditTeam}/>} />
