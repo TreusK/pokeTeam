@@ -8,12 +8,12 @@ import Input from '../components/Input';
 import DroppableCard from '../components/DroppableCard';
 import Notification from '../components/Notification';
 
-import { alreadyInTeam, teamIsNotFull, teamAlreadyExists, inputIsValid, makePokeObject, findFirstReplaceable } from '../assets/helper';
+import { alreadyInTeam, teamIsNotFull, teamAlreadyExists, inputIsValid, makePokeObject, findFirstReplaceable, editTeamIndex } from '../assets/helper';
 
 
 const arr = [0, 1, 2, 3, 4, 5];
 
-function Team({ pokeNames, onSaveTeam, globalCurrentTeam, teams }) {
+function Team({ pokeNames, onSaveTeam, onEditTeam, globalCurrentTeam, teams }) {
   const [isDropped, setIsDropped] = useState(false);
   const [pokeInHole, setPokeInHole] = useState(null);
   const [notif, setNotif] = useState({
@@ -54,7 +54,6 @@ function Team({ pokeNames, onSaveTeam, globalCurrentTeam, teams }) {
 
   //Event handlers
   function handleDeletePoke(poke) {
-    console.log('im deletin')
     setCurrentTeam(oldTeam => {
       let replaceableIndex = poke.cardIndex;
       let copy = [...oldTeam];
@@ -90,10 +89,12 @@ function Team({ pokeNames, onSaveTeam, globalCurrentTeam, teams }) {
     if (teamAlreadyExists(teams, currentTeam)) {
       setNotif({
         show: true,
-        type: 'warning',
-        head: 'Bzzt',
-        body: 'A team with all the same pokemon already exists!',
+        type: 'positive',
+        head: 'Edited',
+        body: 'Team was edited',
       });
+      let teamIndex = editTeamIndex(teams, currentTeam);
+      onEditTeam(currentTeam, teamIndex);
       return;
     }
     if (teamIsNotFull(currentTeam)) {

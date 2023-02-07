@@ -40,7 +40,7 @@ function DroppableCard({ isDropped, pokeInHole, onSaveMoves }) {
                 <img className='scale-125' src={pokeInHole.sprite} alt="mon" />
               </div>
               <div className='pt-2'>
-                {pokeInHole.types.map(elem => <p className='font-["Bakbak"]' key={`pokeInHoleTypes${pokeInHole.name + elem}`}>{elem}</p>)}
+                {pokeInHole.types.map(elem => <p className='CardTypes' key={`pokeInHoleTypes${pokeInHole.name + elem}`}>{elem}</p>)}
               </div>
             </div>
           }

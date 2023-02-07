@@ -58,7 +58,7 @@ function BaseData({ pokeInHole, onSaveMoves }) {
           <datalist id="move4">
             {pokeInHole.allMoves.map(elem => <option key={elem.move.name+'move4'+randomNum()}>{elem.move.name}</option>)}
           </datalist>
-          <button className='bg-blue-200 rounded p-1 px-4 text-gray-500 hover:bg-blue-300' onClick={handleClick}>Save moves</button>
+          <button className='border-solid border-2 border-[#74b9ff] bg-gray-200 hover:bg-[#74b9ff] cursor-pointer hover:text-white text-gray-700 rounded px-2 py-1' onClick={handleClick}>Save moves</button>
         </div>
         : ''
       }

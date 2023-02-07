@@ -10,9 +10,9 @@ function Navbar() {
             <NavLink to='/team' style={({ isActive }) => 
                       (isActive ? {borderBottom: 'solid 2px white'} : {})}
                       className='text-white px-2 py-1 hover:bg-white hover:text-black'>Team</NavLink>
-            <NavLink to='/about' style={({ isActive }) => 
+            <NavLink to='/contact' style={({ isActive }) => 
                       (isActive ? {borderBottom: 'solid 2px white'} : {})}
-                      className='text-white px-2 py-1 hover:bg-white hover:text-black'>About</NavLink>
+                      className='text-white px-2 py-1 hover:bg-white hover:text-black'>Contact</NavLink>
        </div>
    )
 }

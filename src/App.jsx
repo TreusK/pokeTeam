@@ -7,7 +7,7 @@ import Navbar from './components/Navbar';
 //Pages
 import Home from './pages/Home';
 import Team from './pages/Team';
-import About from './pages/About';
+import Contact from './pages/Contact';
 import './App.css';
 //Extra
 
@@ -53,39 +53,48 @@ function App() {
     setGlobalCurrentTeam(currentTeam);
   }
 
+  function handleEditTeam(currentTeam, index) {
+    setTeams(oldTeams => {
+      let copy = [...oldTeams];
+      copy[index].team = [...currentTeam];
+      return copy; 
+    })
+    setGlobalCurrentTeam(currentTeam);
+  }
 
-function handleSeeTeamClick(teamName) {
-  let foundTeam = teams.find(team => team.teamName === teamName);
-  setGlobalCurrentTeam(foundTeam.team);
-}
+  function handleSeeTeamClick(teamName) {
+    let foundTeam = teams.find(team => team.teamName === teamName);
+    setGlobalCurrentTeam(foundTeam.team);
+  }
 
-function handleDeleteTeamClick(teamName) {
-  setTeams(oldTeams => {
-    let oldTeamsCopy = [...oldTeams];
-    let filteredCopy = oldTeamsCopy.filter(team => team.teamName !== teamName);
-    filteredCopy.map((elem, index) => elem.teamName = `Team ${index + 1}`);
-    return filteredCopy;
-  })
-  setGlobalCurrentTeam([]);
-}
+  function handleDeleteTeamClick(teamName) {
+    setTeams(oldTeams => {
+      let oldTeamsCopy = [...oldTeams];
+      let filteredCopy = oldTeamsCopy.filter(team => team.teamName !== teamName);
+      filteredCopy.map((elem, index) => elem.teamName = `Team ${index + 1}`);
+      return filteredCopy;
+    })
+    setGlobalCurrentTeam([]);
+  }
 
-function handleTeamMakerClick() {
-  setGlobalCurrentTeam([]);
-}
+  function handleTeamMakerClick() {
+    setGlobalCurrentTeam([]);
+  }
 
 
-return (
-  <div className='min-h-screen flex flex-col'>
-    <Header />
-    <Navbar />
-    <Routes>
-      <Route path='/' element={<Home teams={teams} onSeeTeamClick={handleSeeTeamClick}
-        onDeleteTeamClick={handleDeleteTeamClick} onTeamMakerClick={handleTeamMakerClick} />} />
-      <Route path='/team' element={<Team pokeNames={pokeNames} teams={teams} onSaveTeam={handleSaveTeam} globalCurrentTeam={globalCurrentTeam} />} />
-      <Route path='/about' element={<About />} />
-    </Routes>
-  </div>
-)
+  return (
+    <div className='min-h-screen flex flex-col'>
+      <Header />
+      <Navbar />
+      <Routes>
+        <Route path='/' element={<Home teams={teams} onSeeTeamClick={handleSeeTeamClick}
+          onDeleteTeamClick={handleDeleteTeamClick} onTeamMakerClick={handleTeamMakerClick} />} />
+        <Route path='/team' element={<Team pokeNames={pokeNames} teams={teams} onSaveTeam={handleSaveTeam} 
+          globalCurrentTeam={globalCurrentTeam} onEditTeam={handleEditTeam}/>} />
+        <Route path='/contact' element={<Contact />} />
+      </Routes>
+    </div>
+  )
 }
 
 export default App
