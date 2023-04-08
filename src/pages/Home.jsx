@@ -9,7 +9,7 @@ function Home({ teams, onSeeTeamClick, onDeleteTeamClick, onTeamMakerClick }) {
     <div className='flex flex-col items-center justify-center flex-1'>
       <h1 className='text-4xl text-center font-bold pt-16'>Build your dream pokemon team!</h1>
       <div className='px-20 py-20 my-10'>
-        <p className='text-2xl mb-8'>Using the latest web technology available humanity you can now </p>
+        <p className='text-2xl mb-8'>Using the latest web technology available to humanity you can now </p>
         <ul className='list-disc leading-loose pl-8'>
           <li><span className='font-semibold text-green-500'>Add pokemon</span> to your team!</li>
           <li><span className='font-semibold text-red-500'>Remove pokemon</span> from your team!</li>

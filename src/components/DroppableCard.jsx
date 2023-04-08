@@ -24,7 +24,7 @@ function DroppableCard({ isDropped, pokeInHole, onSaveMoves }) {
   
 
   return (
-    <div className='py-12' style={gradientColor}>
+    <div className='py-12 flex-1' style={gradientColor}>
 
       <div className='droppableContentContainer mx-auto flex flex-col items-center gap-10 lg:flex-row lg:w-fit'>
         <BaseStats pokeInHole={pokeInHole} />
